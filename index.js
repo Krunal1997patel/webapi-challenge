@@ -12,3 +12,10 @@ I need this code, just don't know where, perhaps should make some middleware, do
 
 Go code!
 */
+
+
+const server = require('./api/server.js');
+
+const port = process.env.POST || 4000;
+
+server.listen(port, console.log(`You are running localhost on ${port} port`))

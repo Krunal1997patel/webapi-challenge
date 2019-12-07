@@ -20,6 +20,7 @@ router.get('/', (req, res) => {
     })
 })
 
+
 router.get('/:id', (req, res) => {
     projectDB.get(req.params.id)
     .then(project => {
@@ -29,6 +30,21 @@ router.get('/:id', (req, res) => {
         console.log(err, 'from GET in project')
         res.status(500).json({
             errror: 'Can not get the project by id'
+        })
+    })
+})
+
+router.get('/:id/action', (req, res) => {
+    const id = req.params.id;
+
+    projectDB.getProjectActions(id)
+    .then(allAction =>{
+        res.status(200).json(allAction)
+    })
+    .catch(err => {
+        console.log(err, 'from GET in project to get all action')
+        res.status(500).json({
+            error: 'Can not all the actions'
         })
     })
 })
@@ -80,7 +96,6 @@ router.delete('/:id', (req, res) => {
         })
     })
 })
-
 
 router.put('/:id', (req, res) => {
     const id = req.params.id;
